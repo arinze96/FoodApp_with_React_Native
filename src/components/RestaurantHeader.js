@@ -90,8 +90,6 @@ const styles = StyleSheet.create({
         height: 200
     },
     image:{
-        borderTopLeftRadius:5,
-        borderTopRightRadius:5,
         marginTop:50
     },
     view1:{
