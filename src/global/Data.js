@@ -1,6 +1,7 @@
 export const filterData = [
     {name: 'fast food', image: require('../../images/fastfood.jpg'), id: '0'},
     {name: 'Burgers', image: require('../../images/burger.jpg'), id: '1'},
+    {name: 'Sea food', image: require('../../images/seafood.jpg'), id: '2'},
     {name: 'Salads', image: require('../../images/salad.jpg'), id: '3'},
     {name: 'Hotdogs', image: require('../../images/hotdog.jpg'), id: '4'},
     {name: 'Chinese', image: require('../../images/chinesefood.jpg'), id: '5'},
@@ -275,3 +276,48 @@ export const restaurantsData = [
       id: 3,
     },
   ];
+
+  export const productData = [
+    {
+      id:0,
+      name:"Hand Cut Chips",
+      price: 29.30,
+      image:require('../../images/cross5.jpg'),
+      details:"Two 100% fresh beef burger patties that are hot, deliciously"
+    },
+    {
+      id:1,
+      name:"Big Mac",
+      price: 50.00,
+      image:require('../../images/cross2.jpg'),
+      details:"Two 100% fresh beef burger patties that are hot, deliciously"
+    },
+    {
+      id:2,
+      name:"Chicken Burger",
+      price: 70.20,
+      image:require('../../images/cross3.jpg'),
+      details:"Two 100% fresh beef burger patties that are hot, deliciously"
+    },
+    {
+      id:3,
+      name:"Hand Cut Chips",
+      price: 29.30,
+      image:require('../../images/cross4.jpg'),
+      details:"Two 100% fresh beef burger patties that are hot, deliciously"
+    },
+    {
+      id:4,
+      name:"Big Mac",
+      price: 50.00,
+      image:require('../../images/cross1.jpg'),
+      details:"Two 100% fresh beef burger patties that are hot, deliciously"
+    },
+    {
+      id:5,
+      name:"Chicken Burger",
+      price: 70.20,
+      image:require('../../images/cross1.jpg'),
+      details:"Two 100% fresh beef burger patties that are hot, deliciously"
+    },
+  ]

@@ -7,6 +7,7 @@ export const colors = {
     grey3: '#86939e',
     grey4:'#bdc6cf',
     grey5: '#e1e8ee',
+    black:'black',
     CardComment: '#86939e',
     cardbackground: 'white',
     headertext: 'white',

@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import SearchComponent from '../components/SearchComponent';
-import {filterData2} from '../global/Data';
+import {filterData2, filterData} from '../global/Data';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 function SearchScreen({navigation}) {
@@ -41,25 +41,25 @@ function SearchScreen({navigation}) {
           ListHeaderComponent={
             <Text style={styles.listHeader}>Top Category</Text>
           }
-          ListFooterComponent={<Footer />}
+          ListFooterComponent={<Footer navigation={navigation} />}
         />
       </View>
     </View>
   );
 }
 
-const Footer = () => {
+const Footer = ({navigation}) => {
   return (
     <View style={{marginTop: 20, marginBottom: 30}}>
       <FlatList
         style={{marginBottom: 1}}
-        data={filterData2}
+        data={filterData}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <TouchableWithoutFeedback
-            onPress={() => {
-              navigation.navigate('SearchResultScreen', {item: item.name});
-            }}>
+              onPress={() => {
+                navigation.navigate('SearchResultScreen', {item: item.name});
+              }}>
             <View style={styles.imageView}>
               <ImageBackground style={styles.image} source={item.image}>
                 <View style={styles.textView}>
