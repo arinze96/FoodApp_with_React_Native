@@ -4,15 +4,15 @@ import { colors } from '../../global/styles';
 import { menuData, specialData } from '../../global/Data';
 import { Icon } from 'react-native-elements';
 
-const MenuScreen = ({navigation, restaurant}) => {
-    const handlePress = () =>{}
+const MenuScreen = ({navigation, restaurant, onPress}) => {
+    
   return (
     <View style={styles.container}>
         <View>
             {
                 specialData.map((items) => 
                     <View key = {items.key} style={styles.view1}>
-                        <TouchableOpacity onPress={handlePress}>
+                        <TouchableOpacity onPress={onPress}>
                             <View style={styles.view2}>
                                 <Icon name="star" type="material-community" color="gold"/>
                                 <Text style={styles.text1}>{items.title}</Text>
@@ -26,7 +26,7 @@ const MenuScreen = ({navigation, restaurant}) => {
             {
                 menuData.map((items) => 
                     <View key = {items.key} style={styles.view1}>
-                        <TouchableOpacity onPress={handlePress}>
+                        <TouchableOpacity onPress={onPress}>
                             <View style={styles.view2}>
                                 <Text style={styles.text1}>{items.title}</Text>
                             </View>

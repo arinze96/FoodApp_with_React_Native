@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
         height: 200
     },
     image:{
-        marginTop:50
+        marginTop:50,
+        height: 200
     },
     view1:{
         flexDirection:'row',

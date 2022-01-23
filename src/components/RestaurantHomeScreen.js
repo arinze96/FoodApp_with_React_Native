@@ -1,5 +1,13 @@
-import React,{useState} from 'react';
-import {ScrollView, StyleSheet, Text, View, Dimensions} from 'react-native';
+import React, {useState} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
 import {fonts} from 'react-native-elements/dist/config';
 import {colors} from '../global/styles';
 import RestaurantHeader from './RestaurantHeader';
@@ -8,45 +16,51 @@ import {Icon} from 'react-native-elements';
 import {TabView, TabBar} from 'react-native-tab-view';
 import MenuScreen from '../screens/RestaurantTabs/MenuScreen';
 
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const initialLayout = SCREEN_WIDTH;
-
 
 const RestaurantHomeScreen = ({navigation, route}) => {
   const {id, restaurant} = route.params;
 
-  const [routes]  =  useState([
-    {key:"first", title:"Menu"},
-    {key:"second", title:"INFO"},
-    {key:"third", title:"REVIEWS"},
-    {key:"fourth", title:"GALLERY"},
+  const [routes] = useState([
+    {key: 'first', title: 'Menu'},
+    {key: 'second', title: 'INFO'},
+    {key: 'third', title: 'REVIEWS'},
+    {key: 'fourth', title: 'GALLERY'},
   ]);
 
-  const [index, setIndex] = useState(0);
 
-  const renderTabBar = props =>(
+  const [index, setIndex] = useState(0);
+  // const [modalVisible, setModalVisible] = useState(false);
+
+  const renderTabBar = props => (
     <TabBar
       {...props}
-      indicatorStyle = {{ backgroundColor:colors.cardbackground }}
-      tabStyle = {styles.tabStyle}
-      scrollEnabled = {true}
-      style = {styles.tab}
-      labelStyle = {styles.tabLabel}
-      contentContainerStyle = {styles.tabContainer}
+      indicatorStyle={{backgroundColor: colors.cardbackground}}
+      tabStyle={styles.tabStyle}
+      scrollEnabled={true}
+      style={styles.tab}
+      labelStyle={styles.tabLabel}
+      contentContainerStyle={styles.tabContainer}
     />
-  )
-  
+  );
+
+
   const UpdateRoute1 = () => {
-    return (
-      <View></View>
-    )
-  }
+    return <View></View>;
+  };
+
+  const menuPressed = () => {
+    navigation.navigate("MenuProductScreen");
+  };
+
   
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{height: 400}}>
           <RestaurantHeader id={id} navigation={navigation} />
           {restaurantsData[id].discount && (
             <View style={styles.view1}>
@@ -57,50 +71,77 @@ const RestaurantHomeScreen = ({navigation, route}) => {
           )}
           <View style={styles.view2}>
             <View style={styles.view3}>
-              <Text style={styles.text2}>{restaurantsData[id].restaurantName}</Text>
+              <Text style={styles.text2}>
+                {restaurantsData[id].restaurantName}
+              </Text>
               <Text style={styles.text3}>{restaurantsData[id].foodType}</Text>
               <View style={styles.view4}>
-                <Icon name="star" type="material-community" color={colors.grey3} size={15}/>
-                <Text style={styles.text4}>{restaurantsData[id].averageReview}</Text>
-                <Text style={styles.text5}>{restaurantsData[id].numberOfReview}</Text>
-                <Icon name="map-marker" type="material-community" color={colors.grey3} size={15}/>
-                <Text style={styles.text6}>{restaurantsData[id].farAway} mi away</Text>
+                <Icon
+                  name="star"
+                  type="material-community"
+                  color={colors.grey3}
+                  size={15}
+                />
+                <Text style={styles.text4}>
+                  {restaurantsData[id].averageReview}
+                </Text>
+                <Text style={styles.text5}>
+                  {restaurantsData[id].numberOfReview}
+                </Text>
+                <Icon
+                  name="map-marker"
+                  type="material-community"
+                  color={colors.grey3}
+                  size={15}
+                />
+                <Text style={styles.text6}>
+                  {restaurantsData[id].farAway} mi away
+                </Text>
               </View>
             </View>
             <View style={styles.view8}>
               <Text style={styles.text6}>Collect</Text>
               <View style={styles.view9}>
-                <Text style={styles.text9}>{restaurantsData[id].collectTime}</Text>
+                <Text style={styles.text9}>
+                  {restaurantsData[id].collectTime}
+                </Text>
                 <Text style={styles.text11}>min</Text>
               </View>
             </View>
             <View style={styles.view8}>
               <Text style={styles.text6}>Delivery</Text>
               <View style={styles.view9}>
-                <Text style={styles.text9}>{restaurantsData[id].deliveryTime}</Text>
+                <Text style={styles.text9}>
+                  {restaurantsData[id].deliveryTime}
+                </Text>
                 <Text style={styles.text11}>min</Text>
               </View>
             </View>
           </View>
         </View>
         <View style={styles.view10}>
-          <TabView 
-            navigationState={{ index, routes }}
+          <TabView
+            navigationState={{index, routes}}
             renderScene={UpdateRoute1}
             onIndexChange={setIndex}
             initialLayout={initialLayout}
             renderTabBar={renderTabBar}
-            tabBarPosition='top'
+            tabBarPosition="top"
           />
         </View>
 
-        {
-          index === 0 &&
-          <MenuScreen/>
-        }
-
-
+        {index === 0 && <MenuScreen onPress={menuPressed} />}
       </ScrollView>
+      <TouchableOpacity>
+        <View style={styles.view11}>
+          <View style={styles.view12}>
+            <Text style={styles.text13}>View Cart</Text>
+            <View style={styles.view13}>
+              <Text style={styles.text13}>0</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -115,7 +156,7 @@ const styles = StyleSheet.create({
   view1: {
     width: '100%',
     padding: 3,
-    marginTop:65,
+    marginTop: 65,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -128,7 +169,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     marginBottom: 5,
-    marginTop:20,
+    marginTop: 20,
     marginHorizontal: 10,
     justifyContent: 'space-between',
   },
@@ -198,13 +239,13 @@ const styles = StyleSheet.create({
   view8: {
     flex: 3,
     alignItems: 'center',
-    marginTop:0
+    marginTop: 0,
   },
   text9: {
     fontSize: 19,
     fontWeight: 'bold',
-    marginTop:5,
-    marginBottom:-9,
+    marginTop: 5,
+    marginBottom: -9,
     color: colors.cardbackground,
   },
   view9: {
@@ -213,7 +254,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.buttons,
     alignItems: 'center',
     borderRadius: 40,
-    marginTop:5,
+    marginTop: 5,
     justifyContent: 'space-around',
   },
   text10: {
@@ -229,7 +270,7 @@ const styles = StyleSheet.create({
   },
   view10: {
     elevation: 10,
-    marginTop:15,
+    marginTop: 15,
     backgroundColor: colors.pagebackground,
   },
   view11: {
@@ -237,6 +278,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignContent: 'center',
     marginBottom: 0,
+    justifyContent: 'center',
   },
   view12: {
     flexDirection: 'row',
@@ -281,4 +323,23 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH / 4,
     maxHeight: 45,
   },
+  view14: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: colors.buttons,
+    top: 0,
+    left: 0,
+    right: 0,
+    paddingTop: 25,
+  },
+
+  text14: {
+    fontWeight: 'bold',
+    marginLeft: 40,
+    color: colors.black,
+    fontSize: 18,
+  },
+
+  view15: {marginTop: 5, paddingBottom: 20},
 });
